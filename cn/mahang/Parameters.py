@@ -24,35 +24,43 @@ class Parameters:
     def __init__(self):
         pass
 
-    def get_nominal_GasTurbine(self, temporary):
+    @staticmethod
+    def get_nominal_GasTurbine(temporary):
         nominal_GasTurbine = temporary[0]
         return nominal_GasTurbine
 
-    def get_nominal_Boiler(self, temporary):
+    @staticmethod
+    def get_nominal_Boiler(temporary):
         nominal_Boiler = temporary[1]
         return nominal_Boiler
 
-    def get_nominal_AbsorptionChiller(self, temporary):
+    @staticmethod
+    def get_nominal_AbsorptionChiller(temporary):
         nominal_AbsorptionChiller = temporary[2]
         return nominal_AbsorptionChiller
 
-    def get_nominal_GasBoiler(self, temporary):
+    @staticmethod
+    def get_nominal_GasBoiler(temporary):
         nominal_GasBoiler = temporary[3]
         return nominal_GasBoiler
 
-    def get_nominal_HeatPump(self, temporary):
+    @staticmethod
+    def get_nominal_HeatPump(temporary):
         nominal_HeatPump = temporary[4]
         return nominal_HeatPump
 
-    def get_nominal_ColdStorage(self, temporary):
+    @staticmethod
+    def get_nominal_ColdStorage(temporary):
         nominal_ColdStorage = temporary[5]
         return nominal_ColdStorage
 
-    def get_nominal_HeatStorage(self, temporary):
+    @staticmethod
+    def get_nominal_HeatStorage(temporary):
         nominal_HeatStorage = temporary[6]
         return nominal_HeatStorage
 
-    def get_nominal_EleStorage(self, temporary):
+    @staticmethod
+    def get_nominal_EleStorage(temporary):
         nominal_EleStorage = temporary[7]
         return nominal_EleStorage
 

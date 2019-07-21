@@ -14,5 +14,5 @@ class CapitalCost:
 
 
 # 以下为测试
-a = CapitalCost([10, 10, 10, 10, 10, 10, 10, 10])
-print(a.cc_AbsorptionChiller)
+# a = CapitalCost([10, 10, 10, 10, 10, 10, 10, 10])
+# print(a.cc_AbsorptionChiller)

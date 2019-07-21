@@ -27,4 +27,4 @@ def Judge(temporary):
         judgeresult = 0
     return judgeresult   # 1 为 Yes， 0为No
 
-Judge([1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000])
+# Judge([1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000])

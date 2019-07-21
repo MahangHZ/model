@@ -1,12 +1,9 @@
 # _*_ coding: utf-8 _*_
-import sys
 
-sys.path.append('CaptitalCost')
 from cn.mahang.genetic.objectfunction.Consumption import Consumption
 from cn.mahang.genetic.objectfunction.CapitalCost import CapitalCost
 from cn.mahang.Parameters import Parameters
 from cn.mahang.genetic.constriction.main import Judge
-
 
 
 def ObjectiveFunction(temporary):   # temporary为长度为8的数组，8个数分别为汽轮机功率，锅炉功率，制冷机功率，燃气锅炉功率，
