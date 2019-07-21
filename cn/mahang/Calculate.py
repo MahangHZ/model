@@ -2,7 +2,7 @@
 from cn.mahang.genetic.Fitness import fitness
 from cn.mahang.genetic.GeneticConstant import Constant
 from cn.mahang.genetic.HeredityMutation import newpopulation
-from cn.mahang.genetic.NextSpecies import NextSpecies
+from cn.mahang.genetic.NextSpecies import nextspecies
 from cn.mahang.genetic.OutputMin import outputMin
 from cn.mahang.genetic.PowerSelection import PowerSelection
 from cn.mahang.genetic.Selection import selection
@@ -32,7 +32,7 @@ def calculate(times):
         print(newpopulation_result)
         fitness1 = fitness(newpopulation_result)
         selectednumber = selection(fitness1)
-        newspecies = NextSpecies(newpopulation_result, selectednumber)
+        newspecies = nextspecies(newpopulation_result, selectednumber)
         print("time", i, "newspecies", newspecies)
     return 0
 
