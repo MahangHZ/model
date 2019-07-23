@@ -5,10 +5,10 @@ from cn.mahang.genetic.GeneticConstant import Constant
 
 
 # 计算所有适应度函数之和  fitness1是经过fitness函数计算得出的适应函数值  的数组
-def sum(fitness1):
-    total=0
+def sumup(fitness1):
+    total = 0
     for i in range(len(fitness1)):
-        total+=fitness1[i]
+        total += fitness1[i]
     return total
 
 
@@ -25,13 +25,14 @@ def cumsum(fitness1):
 
 # 轮盘赌模型，选出fitness1中被选中的标号
 def selection(fitness1):
-    total = sum(fitness1)
+    total = sumup(fitness1)
     probability = []
     randomdigit = []
     selectednumber = []
     for i in range(len(fitness1)):
         probability.append(fitness1[i] / total)   # probability是除完的概率，例 0.1  0.2  0.3   0.1  0.2   0.2
     fitness3 = cumsum(probability)   # fitness3 是加好的概率  例 0.1  0.3  0.6  0.8  1
+    print(fitness3)
     for i in range(Constant.population_size):
         randomdigit.append(random.random())   # randomdigit 是生成的10个（0,1）之间随机数的数组
     for i in range(Constant.population_size):
@@ -41,4 +42,5 @@ def selection(fitness1):
             for j in range(len(fitness3) - 1):
                 if (randomdigit[i] <= fitness3[j + 1]) & (randomdigit[i] > fitness3[j]):
                     selectednumber.append(j + 1)
+                    break
     return selectednumber

@@ -34,16 +34,21 @@ def mutation(population):  # population是二维数组，存放父代（10个）
     for i in range(Constant.population_size):
         father = population[i]
         mutationlocation = []
-        temporarystorage = []
+        temporarystorage = []  # 复制原染色体
         for m in range(Constant.chromosome_length):
             temporarystorage.append(father[m])
         for j in range(Constant.chromosome_length):
             if Constant.mutate_rate >= random.random():
                 mutationlocation.append(j)  # mutationlocation 记录第i个染色体内基因变异位置
         for k in range(len(mutationlocation)):
-            p = random.randint(0, 9)  # p为变异后基因
-            while p == temporarystorage[mutationlocation[k]]:
-                p = random.randint(0, 9)
+            if mutationlocation[k] == 1:
+                p = random.randint(1, father[0])
+            elif mutationlocation[k] == 2:
+                p = random.randint(1, father[1])
+            elif mutationlocation[k] == 4:
+                p = random.randint(1, father[0])
+            else:
+                p = random.randint(1, 99)
             temporarystorage[mutationlocation[k]] = p
         offspring = temporarystorage
         offspring_m.append(offspring)
@@ -52,11 +57,11 @@ def mutation(population):  # population是二维数组，存放父代（10个）
 
 def newpopulation(population):  # newpopulation 为初始种群+ 子代
     newpopulation_result = population
-    print("population:", newpopulation_result)
+    # print("population:", newpopulation_result)
     offspring_h = heredity(population)
-    print("heredity:", offspring_h)
+    # print("heredity:", offspring_h)
     offspring_m = mutation(population)
-    print("mutation:", offspring_m)
+    # print("mutation:", offspring_m)
     for i in range(len(offspring_h)):
         newpopulation_result.append(offspring_h[i])
     for j in range(len(offspring_m)):

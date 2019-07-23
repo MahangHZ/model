@@ -1,6 +1,7 @@
 # _*_ coding: utf-8 _*_
 from cn.mahang.Parameters import Parameters
 
+
 class AbsorptionChiller:
     def __init__(self, temporary):
         self.nominal = Parameters.get_nominal_AbsorptionChiller(temporary)
@@ -9,9 +10,9 @@ class AbsorptionChiller:
         self.heat_in_max = self.nominal/self.COP
 
     def get_C_out(self, heat_in):
-        AbsorptionChiller_cold_out = heat_in*self.COP
-        return AbsorptionChiller_cold_out
+        absorptionChiller_cold_out = heat_in*self.COP
+        return absorptionChiller_cold_out
 
     def get_H_in(self, cold_out):
-        AbsorptionChiller_heat_in = cold_out/self.COP
-        return AbsorptionChiller_heat_in
+        absorptionChiller_heat_in = cold_out/self.COP
+        return absorptionChiller_heat_in

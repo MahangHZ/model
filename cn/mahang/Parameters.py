@@ -64,3 +64,4 @@ class Parameters:
         nominal_EleStorage = temporary[7]
         return nominal_EleStorage
 
+

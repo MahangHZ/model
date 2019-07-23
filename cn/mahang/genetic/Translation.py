@@ -8,8 +8,8 @@ def translation(population):  # population 必须是一个二维数组
     for i in range(len(population)):
         temporary = population[i]
         selection = []  # []是空数组的意思
-        for j in range(Constant.chromosome_length // 2):
-            selection.append(((10 * temporary[(2 * j)] + temporary[((2 * j) + 1)]) * 100))
+        for j in range(Constant.chromosome_length):
+            selection.append(temporary[j] * 100)
             # selection[0] 为汽轮机功率kW，selection[1]为余热锅炉功率，selection[2]为制冷机功率，selection[3]为燃气锅炉功率
             # selection[4]为热泵功率，selection[5]为储冷容量kWh，selection[6]为储热容量，selection[7]为储电容量
         translationresult.append(selection)

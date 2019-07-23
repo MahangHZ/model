@@ -12,7 +12,6 @@ class CHP:
         absorptionchiller = AbsorptionChiller(temporary)
         self.E_out_max = gasturbine.nominal
         self.heat_ele_ratio = 0.94 * gasturbine.effi_th_nom / gasturbine.effi_ele_nom  # 0.94: 热电比认为可不变.xlsx 文件里F 列
-
         if gasturbine.get_H_out(Parameters.get_nominal_GasTurbine(temporary)) <= boiler.heat_in_max:
             boiler_heat_in = gasturbine.get_H_out(Parameters.get_nominal_GasTurbine(temporary))
             # 进入余热锅炉的热量，但设计的结果一定是gasturbine.get_H_out(P.nominal_GasTurbine) >= boiler.heat_in_max #
