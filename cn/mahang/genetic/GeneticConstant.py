@@ -6,7 +6,7 @@ class Constant:
     chromosome_length = 8
     heredity_rate = 0.5
     mutate_rate = 0.25
-    calculate_times = 20
+    calculate_times = 500
 
     def __init__(self):
         pass

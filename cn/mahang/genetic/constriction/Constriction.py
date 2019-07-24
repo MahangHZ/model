@@ -41,15 +41,17 @@ def MaxOutputJudge(temporary):   # CHP 最大产能情况下是否可行, 该函
     coldstorage = ColdStorage(temporary)
     demand = DemandData()
     for t in range(0, demand.E_sheetnrows-1, Parameters.delttime):
-        if (heat_out_max + (chp.H_out_max + gasboiler.nominal)*Parameters.delttime >= demand.H[t]) &\
-                (cold_out_max + (chp.C_out_max + heatpump.nominal)*Parameters.delttime >= demand.C[t]):
+        if ((heat_out_max + chp.H_out_max + gasboiler.nominal)*Parameters.delttime >= demand.H[t]) &\
+                ((cold_out_max + chp.C_out_max + heatpump.nominal)*Parameters.delttime >= demand.C[t]):
             # 判断进入储热的热量和储热放出的热量 #
             if (chp.H_out_max + gasboiler.nominal) * Parameters.delttime >= demand.H[t]:  # 最大产生热量大于热需求，热量可存入储热器
-                heat_in = (chp.H_out_max + gasboiler.nominal) * Parameters.delttime - demand.H[t]
+                heat_in = (((chp.H_out_max + gasboiler.nominal) * Parameters.delttime - demand.H[t]) /
+                           Parameters.delttime)
                 heat_out = 0
             else:             # 最大产生热量小于热需求，储热器放热
                 heat_in = 0
-                heat_out = demand.H[t] - (chp.H_out_max + gasboiler.nominal) * Parameters.delttime
+                heat_out = ((demand.H[t] - (chp.H_out_max + gasboiler.nominal) * Parameters.delttime) /
+                            Parameters.delttime)
                 # 此时heat_out 一定小于 heat_out_max
             heatstor = heatstorage.get_S(heatstor, heat_in, heat_out)
             heat_out_max = heatstorage.get_H_out_max(heatstor)
@@ -57,11 +59,11 @@ def MaxOutputJudge(temporary):   # CHP 最大产能情况下是否可行, 该函
             # 接下来判断进入储冷的冷量和储冷放出的冷量 #
 
             if (chp.C_out_max + heatpump.nominal)*Parameters.delttime >= demand.C[t]:  # 最大产生冷量大于热需求，冷量可存入储热器
-                cold_in = (chp.C_out_max + heatpump.nominal)*Parameters.delttime - demand.C[t]
+                cold_in = ((chp.C_out_max + heatpump.nominal)*Parameters.delttime - demand.C[t]) / Parameters.delttime
                 cold_out = 0
             else:      # 最大产生冷量小于热需求，储冷器放冷
                 cold_in = 0
-                cold_out = demand.C[t] - (chp.C_out_max + heatpump.nominal)*Parameters.delttime
+                cold_out = (demand.C[t] - (chp.C_out_max + heatpump.nominal)*Parameters.delttime) / Parameters.delttime
                 # 此时cold_out 一定小于 cold_out_max
             coldstor = coldstorage.get_S(coldstor, cold_in, cold_out)
             cold_out_max = coldstorage.get_C_out_max(coldstor)
@@ -78,8 +80,8 @@ def FeasibleRegion(temporary):
     coldstorage = ColdStorage(temporary)
     demand = DemandData()
     for t in range(0, demand.E_sheetnrows - 1, Parameters.delttime):
-        if (heatstorage.H_out_nominal + chp.H_out_max + gasboiler.nominal < demand.H[t]) |\
-                (coldstorage.C_out_nominal + chp.C_out_max + heatpump.nominal < demand.C[t]):
+        if ((heatstorage.H_out_nominal + chp.H_out_max + gasboiler.nominal) * Parameters.delttime < demand.H[t]) |\
+                ((coldstorage.C_out_nominal + chp.C_out_max + heatpump.nominal) * Parameters.delttime < demand.C[t]):
             return 0
     return 1
 
@@ -106,8 +108,10 @@ def RunningJudge(temporary):
         cold_stor_list.append(coldstor)
         heat_stor_list.append(heatstor)
         ele_stor_list.append(elestor)
-        if (demand.H[t] > (heatstorage.get_H_out_max(heatstor) + chp.H_out_max + gasboiler.nominal)) |\
-                (demand.C[t] > (coldstorage.get_C_out_max(coldstor) + chp.C_out_max + heatpump.nominal)):
+        if ((demand.H[t] > (heatstorage.get_H_out_max(heatstor) + chp.H_out_max + gasboiler.nominal)
+            * Parameters.delttime) |
+                (demand.C[t] > (coldstorage.get_C_out_max(coldstor) + chp.C_out_max + heatpump.nominal)
+                 * Parameters.delttime)):
             return 0
         else:
             result = RunningProcess(t, temporary, coldstor, heatstor, elestor)   # result是个数组

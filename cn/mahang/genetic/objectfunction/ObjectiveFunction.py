@@ -10,13 +10,15 @@ def ObjectiveFunction(temporary):  # temporary为长度为8的数组，8个数�
     if Judge(temporary) == 1:
         capitalcost = CapitalCost(temporary)
         consumptioncost = Consumption(temporary)
-        investmentcost = capitalcost.cc_GasTurbine + capitalcost.cc_AbsorptionChiller
-        operationcost = consumptioncost[2] * Parameters.price_Ele + ((consumptioncost[0] + consumptioncost[1]) *
-                                                                         Parameters.price_Gas)
+        investmentcost = (capitalcost.cc_GasTurbine + capitalcost.cc_AbsorptionChiller + capitalcost.cc_Boiler +
+                          capitalcost.cc_GasBoiler + capitalcost.cc_HeatPump + capitalcost.cc_HeatStorage +
+                          capitalcost.cc_ColdStorage + capitalcost.cc_EleStorage)
+        operationcost = (consumptioncost[2] * Parameters.delttime * Parameters.price_Ele +
+                        ((consumptioncost[0] + consumptioncost[1]) * Parameters.price_Gas))
         totalcost = investmentcost + operationcost
     else:
         totalcost = -100  # 使其为负数，轮盘赌时不会选到
     return totalcost  # totalcost为一个数字，temporary的适应度函数
 
 
-# print(ObjectiveFunction([9900, 9900, 9900, 9900, 1300, 6300, 3300, 900]))
+# print(ObjectiveFunction([1600, 2100, 200, 5000, 3900, 3400, 1600, 9400]))

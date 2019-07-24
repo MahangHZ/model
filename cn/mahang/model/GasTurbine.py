@@ -8,9 +8,9 @@ class GasTurbine:
     "输入：PL，nominal"
 
     def __init__(self, temporary):
-        self.nominal = Parameters.get_nominal_GasTurbine(temporary) # nominal: KW
+        self.nominal = Parameters.get_nominal_GasTurbine(temporary)  # nominal: KW
         if self.nominal > 0:
-            self.effi_ele_nom = 0.04049*math.log(self.nominal)-0.068
+            self.effi_ele_nom = 0.04049*math.log(self.nominal)-0.0687
             self.effi_th_nom = -0.025*math.log(self.nominal)+0.64
         else:
             self.effi_ele_nom = 0

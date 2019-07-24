@@ -5,21 +5,15 @@ from cn.mahang.Parameters import Parameters
 
 
 class CapitalCost:
-    def __init__(self, temporary):
-            if Parameters.get_nominal_GasTurbine(temporary) > 0:
-                self.cc_GasTurbine = -108.8 * math.log(Parameters.get_nominal_GasTurbine(temporary)) + 1953
-                # 默认nominal_GasTurbine > 1000
-            else:
-                self.cc_GasTurbine = 0
-            if Parameters.get_nominal_AbsorptionChiller(temporary) >= 1000:    # 疑问：1000的时候这俩公式值不相等！！！
-                self.cc_AbsorptionChiller = -81.552 * math.log(Parameters.get_nominal_AbsorptionChiller(temporary)) + 778
-            elif ((Parameters.get_nominal_AbsorptionChiller(temporary) > 0) &
-                  (Parameters.get_nominal_AbsorptionChiller(temporary) < 1000)):
-                self.cc_AbsorptionChiller = -35.4 * math.log(Parameters.get_nominal_AbsorptionChiller(temporary)) + 431
-            else:
-                self.cc_AbsorptionChiller = 0
+    def __init__(self, temporary):  # 单位均为 元
+        self.cc_GasTurbine = 3000 * Parameters.get_nominal_GasTurbine(temporary)
+        self.cc_AbsorptionChiller = 1200 * Parameters.get_nominal_AbsorptionChiller(temporary)
+        self.cc_Boiler = 300 * Parameters.get_nominal_Boiler(temporary)
+        self.cc_GasBoiler = 300 * Parameters.get_nominal_GasBoiler(temporary)
+        self.cc_HeatPump = 970 * Parameters.get_nominal_HeatPump(temporary)
+        self.cc_HeatStorage = 230 * Parameters.get_nominal_HeatStorage(temporary)
+        self.cc_ColdStorage = 230 * Parameters.get_nominal_ColdStorage(temporary)
+        self.cc_EleStorage = 230 * Parameters.get_nominal_EleStorage(temporary)
 
 
-# 以下为测试
-# a = CapitalCost([10, 10, 10, 10, 10, 10, 10, 10])
-# print(a.cc_AbsorptionChiller)
+

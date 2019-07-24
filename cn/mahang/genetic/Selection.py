@@ -32,7 +32,6 @@ def selection(fitness1):
     for i in range(len(fitness1)):
         probability.append(fitness1[i] / total)   # probability是除完的概率，例 0.1  0.2  0.3   0.1  0.2   0.2
     fitness3 = cumsum(probability)   # fitness3 是加好的概率  例 0.1  0.3  0.6  0.8  1
-    print(fitness3)
     for i in range(Constant.population_size):
         randomdigit.append(random.random())   # randomdigit 是生成的10个（0,1）之间随机数的数组
     for i in range(Constant.population_size):

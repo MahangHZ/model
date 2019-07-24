@@ -21,5 +21,4 @@ def fitness(newpopulation):  # newpopulation是一个二维数组， 待选择�
     return fitness1
 
 
-a = [[32, 9, 9, 99, 13, 63, 33, 9], [99, 99, 99, 99, 13, 63, 33, 9]]
-print(fitness(a))
+
